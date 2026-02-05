@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   libftplus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alusnia <alusnia@student.42Warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 09:55:56 by alusnia           #+#    #+#             */
-/*   Updated: 2025/11/08 10:11:28 by alusnia          ###   ########.fr       */
+/*   Created: 2026/02/05 21:15:48 by alusnia           #+#    #+#             */
+/*   Updated: 2026/02/05 21:39:23 by alusnia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFTPLUS_H 
+# define LIBFTPLUS_H 
+# include "../printf/incs/ft_printf.h"
 
-int	ft_isspace(int c)
-{
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (8192);
-	return (0);
-}
+extern char	*get_next_line(int fd);
+
+#endif

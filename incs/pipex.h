@@ -6,7 +6,7 @@
 /*   By: alusnia <alusnia@student.42Warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 07:59:48 by alusnia           #+#    #+#             */
-/*   Updated: 2026/02/04 21:30:13 by alusnia          ###   ########.fr       */
+/*   Updated: 2026/02/05 21:33:28 by alusnia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string.h>
 # include <errno.h>
 # include <sys/wait.h>
-# include "libft/libft.h"
+# include "libftplus.h"
 
 typedef struct s_data
 {

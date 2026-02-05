@@ -1,51 +1,53 @@
-# Compiler
-CC = cc
+CC			= cc
 
-# Compiler flags
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS		= -Wall -Wextra -Werror -g -I$(LIB_DIR)/incs -I$(INCS_DIR)
 
-# Executable Name
-NAME = pipex
+NAME		= pipex
 
-LIBFT_DIR = ./libft
+LIB_DIR		= ./lib
 
-LIBFT = $(LIBFT_DIR)/libft.a
+LIB			= $(LIB_DIR)/libftplus.a
 
-FILES = main.c pipex_utils.c init_data.c
+INCS_DIR	= ./incs
 
-# Object Files
-OBJS = $(FILES:.c=.o)
+INCS 		= $(INCS_DIR)/pipex.h
 
-# Headers
-HEADERS = pipex.h $(LIBFT_DIR)/libft.h
+OBJS_DIR	= ./objs
 
-# Default target
+OBJS		= $(addprefix $(OBJS_DIR)/,$(SRCS:.c=.o))
+
+SRCS_DIR	= ./srcs
+
+SRCS		= main.c pipex_utils.c init_data.c
+
 all: $(NAME)
 
-# Build executable
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(LIB) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
-# Build libft
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+$(LIB):
+	$(MAKE) -C $(LIB_DIR)
 
-# Compile object files
-%.o: %.c $(HEADERS)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(INCS) | $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean object files
-clean:
-	rm -f $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
+$(OBJS_DIR):
+	mkdir -p $(OBJS_DIR)
 
-# Remove executables and object files
+clean:
+	rm -rf $(OBJS_DIR)
+	$(MAKE) -C $(LIB_DIR) clean
+
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(LIB_DIR) fclean
 
-# Rebuild everything
 re: fclean all
 
-# Phony targets
-.PHONY: all clean fclean re
+del_lib:
+	@echo $(SEP)
+	@echo "Deleting library libftplus..."
+	@echo $(SEP)
+	$(MAKE) -C $(LIB_DIR) del_lib
+
+.PHONY: all clean fclean re del_lib
