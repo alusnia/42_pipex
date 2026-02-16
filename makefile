@@ -23,31 +23,32 @@ SRCS		= main.c pipex_utils.c init_data.c
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
+	@echo "$(NAME): Done!"
 
 $(LIB):
-	$(MAKE) -C $(LIB_DIR)
+	@$(MAKE) -C $(LIB_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(INCS) | $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR)
 
 clean:
-	rm -rf $(OBJS_DIR)
-	$(MAKE) -C $(LIB_DIR) clean
+	@rm -rf $(OBJS_DIR)
+	@$(MAKE) -C $(LIB_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(LIB_DIR) fclean
+	@rm -f $(NAME)
+	@$(MAKE) -C $(LIB_DIR) fclean
 
-re: fclean all
+re: del_lib fclean all
 
 del_lib:
 	@echo $(SEP)
 	@echo "Deleting library libftplus..."
 	@echo $(SEP)
-	$(MAKE) -C $(LIB_DIR) del_lib
+	@$(MAKE) -C $(LIB_DIR) del_lib
 
 .PHONY: all clean fclean re del_lib
